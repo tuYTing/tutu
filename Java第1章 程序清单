@@ -21,3 +21,10 @@ public class ComputeExpression {
 		System.out.println((10.5 + 2 * 3) / (45 - 3.5));
 	}
 }
+
+//1-4
+public class ShowSyntaxErrors {
+	public static main(String[] args) {   //错误，main前遗漏关键字void
+		System.out.println("Welcome to Java);     //错误，字符串应该加上引号*
+	}
+}

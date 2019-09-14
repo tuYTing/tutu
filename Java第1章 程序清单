@@ -28,3 +28,10 @@ public class ShowSyntaxErrors {
 		System.out.println("Welcome to Java);     //错误，字符串应该加上引号*
 	}
 }
+
+//1-5
+public class ShowRuntimeErrors {
+	public static void main(String[] args) {
+		System.out.println(1 / 0);    //运行时错误(runtime error), 0作除数
+	}
+}

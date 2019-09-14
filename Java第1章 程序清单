@@ -35,3 +35,11 @@ public class ShowRuntimeErrors {
 		System.out.println(1 / 0);    //运行时错误(runtime error), 0作除数
 	}
 }
+
+//1-6
+public class ShowLogicErrors {
+	public static void main(String[] args) {
+		System.out.println("Celsius 35 is Fahrenheit degree ");
+		System.out.println((9 / 5) * 35 + 32);    //逻辑错误(logic error), 整数相除返回整数部分，这里应该是9.0 / 5
+	}
+}

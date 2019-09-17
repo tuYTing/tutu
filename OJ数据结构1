@@ -1,16 +1,16 @@
 #include<stdio.h>
 int main() {
 	int k, i;
-	scanf_s("%d", &k);
+	scanf("%d", &k);
 	while (k--) {
 		int m, n, a[1000], b[1000], c[1000], k1, k2, k3;
-		scanf_s("%d", &m);
+		scanf("%d", &m);
 		for (i = 0; i < 2 * m; i++) {
-			scanf_s("%d", &a[i]);
+			scanf("%d", &a[i]);
 		}
-		scanf_s("%d", &n);
+		scanf("%d", &n);
 		for (i = 0; i < 2 * n; i++) {
-			scanf_s("%d", &b[i]);
+			scanf("%d", &b[i]);
 		}
 		k1 = m;
 		k2 = n;
@@ -32,11 +32,27 @@ int main() {
 				k1 += 1; k2 += 1; k3 += 2;
 			}
 		}
+		if (k1 != 2 * m && k2 == 2 * n) {
+			for(i = k1; i < 2 * m; i++){
+				c[k3] = a[k1 - m];
+				c[k3 + 1] = a[k1];
+				k1 += 1; k3 += 2;
+			}
+		}
+		if (k2 != 2 * n && k1 == 2 * m) {
+			for(i = k2; i < 2 * n; i++){
+				c[k3] = b[k2 - n];
+				c[k3 + 1] = b[k2];
+				k2 += 1; k3 += 2;
+			}
+		}
 		for (i = 0; i < k3; i += 2) {
-			printf("%d ", c[i]);
+			if(c[i] != 0)
+				printf("%d ", c[i]);
 		}
 		for (i = 1; i < k3; i += 2) {
-			printf("%d ", c[i]);
+			if(c[i - 1] != 0)
+				printf("%d ", c[i]);
 		}
 		printf("\n");
 	}

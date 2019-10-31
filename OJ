@@ -102,3 +102,72 @@ int main()
 	cout << endl;
 	return 0;
 }*/
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+char s[1000];
+typedef struct Node {
+	char data;
+ struct Node* lchild;
+ struct	Node* rchild;
+}Node,*ptr;
+int i =0;
+ptr tree(){//建结点
+	ptr bt;
+	char k;
+	scanf("%c",&k);
+	if (k == '.'){
+		bt = NULL; 
+	}
+	else{
+		bt = (ptr)malloc(sizeof(Node));
+		bt->data =k;
+		bt->lchild=tree();
+		bt->rchild=tree();
+	}
+
+	return bt;
+}
+
+
+void inorder(ptr T)
+{
+if (T)            // T != NULL 
+	{
+		inorder(T->lchild);  //递归周游其左子
+		printf("%c", T->data );
+		inorder(T->rchild);           //递归周游其右子树 
+	}
+}
+
+/*void inorder(ptr h) {  // 输出中序序列
+	if (h) {
+		inorder(h->lchild);
+		printf("%c", h->data);
+		inorder(h->rchild);
+	}
+}*/
+//释放空间
+ptr FreeTree(ptr T)
+{
+	if (T)
+	{
+		FreeTree(T->lchild);            //递归释放其左子树 
+		FreeTree(T->rchild);           //递归释放其右子树 
+		free(T);                      //释放根节点 
+		T = NULL;                     //释放指向根节点的指针 
+	}
+	return T;           //返回释放后的根节点NULL 
+}
+
+
+int main() {
+	
+	ptr h;	
+	h=tree();
+	inorder(h);
+	printf("\n");
+	FreeTree(h);	
+	return 0;
+}

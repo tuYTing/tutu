@@ -88,6 +88,7 @@ public class CircleFromSimpleGeometricObject
 	public double getDiameter() {
 		return 2 * radius;
 	}
+	
 	/** Return perimeter */
 	public double getPerimeter() {
 		return 2 * radius * Math.PI;
@@ -101,3 +102,77 @@ public class CircleFromSimpleGeometricObject
 }
 
 //11-3
+public class RectangleFromSimpleGeometricObject
+	extends SimpleGeometricObject {
+	private double width;
+	private double height;
+	
+	public RectangleFromSimpleGeometricObject() {
+	}
+	
+	public RectangleFromSimpleGeometricObject(
+			double width, double height) {
+		this.width = width;
+		this.height = height;
+	}
+	
+	public RectangleFromSimpleGeometricObject(
+			double width, double height, String color, boolean filled) {
+		this.width = width;
+		this.height = height;
+		setColor(color);
+		setFilled(filled);
+	}
+
+	/** Return width */
+	public double getWidth() {
+		return width;
+	}
+	
+	/** Set a new width */
+	public void setWidth(double width) {
+		this.width = width;
+	}
+	
+	/** Return height */
+	public double getHeight() {
+		return height;
+	}
+	
+	/** Set a new height */
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	
+	/** Return area */
+	public double getArea() {
+		return width * height;
+	}
+	
+	/** Return perimeter */
+	public double getPerimeter() {
+		return 2 * (width + height);
+	}
+}
+
+//11-4
+public class TestCircleRectangle {
+	public static void main(String[] args) {
+		CircleFromSimpleGeometricObject circle =
+		 new CircleFromSimpleGeometricObject(1);
+		System.out.println("A circle " + circle.toString());
+		System.out.println("The color is " + circle.getColor());
+		System.out.println("The radius is " + circle.getRadius());
+		System.out.println("The area is " + circle.getArea());
+		System.out.println("The diameter is " + circle.getDiameter());
+		
+		RectangleFromSimpleGeometricObject rectangle =
+		 new RectangleFromSimpleGeometricObject(2, 4);
+		System.out.println("\nA rectangle " + rectangle.toString());
+		System.out.println("The area is " + rectangle.getArea());
+		System.out.println("The perimeter is " +
+		  rectangle.getPerimeter());
+	}
+}
+
+//11-5

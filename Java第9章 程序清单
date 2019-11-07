@@ -55,3 +55,149 @@ class SimpleCircle{
 }
 
 //9-2
+public class SimpleCircle {
+	/** Main method */
+	public static void main(String[] args) {
+		// Create a circle with radius 1
+		SimpleCircle circle1 = new SimpleCircle();
+		System.out.println("The area of the circle of radius "
+			+ circle1.radius + " is " + circle1.getArea());
+			
+		// Create a circle with radius 25
+		SimpleCircle circle2 = new SimpleCircle(25);
+		System.out.println("The area of the circle of radius "
+			+ circle2.radius + " is " + circle2.getArea());
+			
+		// Create a circle with radius 125
+		SimpleCircle circle3 = new SimpleCircle(125);
+		System.out.println("The area of the circle of radius "
+			+ circle3.radius + " is " + circle3.getArea());
+			
+		// Modify circle radius
+		circle2.radius = 100;
+		System.out.println("The area of the circle of radius "
+			+ circle2.radius + " is " + circle2.getArea());
+	}
+
+	double radius;
+		
+	/** Construct a circle with radius 1 */
+	SimpleCircle() {
+		radius = 1;
+	}
+		
+	/** Construct a circle with a specified radius */
+	SimpleCircle(double newRadius) {
+		radius = newRadius;
+	}
+		
+	/** Return the area of this circle */
+	double getArea() {
+		return radius * radius * Math.PI;
+	}
+		
+	/** Return the perimeter of this circle */
+	double getPerimeter() {
+		return 2 * radius * Math.PI;
+	}
+		
+	/** Set a new radius for this circle */
+	void setRadius(double newRadius) {
+		radius = newRadius;
+	}
+}
+
+//9-3
+public class TV {
+	int channel = 1; // Default channel is 1
+	int volumeLevel = 1; // Default volume level is 1
+	boolean on = false; // TV is off
+	
+	public TV() {	
+	}
+	
+	public void turnOn() {
+		on = true;
+	}
+	
+	public void turnOff() {
+		on = false;
+	}
+	
+	public void setChannel(int newChannel) {
+		if (on && newChannel >= 1 && newChannel <= 120)
+			channel = newChannel;
+	}
+	
+	public void setVolume(int newVolumeLevel) {
+		if (on && newVolumeLevel >= 1 && newVolumeLevel <= 7)
+			volumeLevel = newVolumeLevel;
+	}
+	
+	public void channelUp() {
+		if (on && channel < 120)
+			channel++;
+	}
+	
+	public void channelDown() {
+		if (on && channel > 1)
+			channel--;
+	}
+	
+	public void volumeUp() {
+		if (on && volumeLevel < 7)
+			volumeLevel++;
+	}
+	
+	public void volumeDown() {
+		if (on && volumeLevel > 1)
+			volumeLevel--;
+	}
+}
+
+//9-4
+public class TestTV {
+	public static void main(String[] args) {
+		TV tv1 = new TV();
+		tv1.turnOn();
+		tv1.setChannel(30);
+		tv1.setVolume(3);
+		
+		TV tv2 = new TV();
+		tv2.turnOn();
+		tv2.channelUp();
+		tv2.channelUp();
+		tv2.volumeUp();
+		
+		System.out.println("tv1's channnel is " + tv1.channel
+			+ " and volume level is " + tv1.volumeLevel);
+		System.out.println("tv2's channnel is " + tv2.channel
+			+ " and volume level is " + tv2.volumeLevel);
+	}
+}
+
+//9-5
+import java.util.Scanner;
+import javafx.geometry.Point2D;
+
+public class TestPoint2D {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Enter point1's x-, y-coordinates: ");
+		double x1 = input.nextDouble();
+		double y1 = input.nextDouble();
+		System.out.print("Enter point2's x-, y-coordinates: ");
+		double x2 = input.nextDouble();
+		double y2 = input.nextDouble();
+		
+		Point2D p1 = new Point2D(x1, y1);
+		Point2D p2 = new Point2D(x2, y2);
+		System.out.println("p1 is " + p1.toString());
+		System.out.println("p2 is " + p2.toString());
+		System.out.println("The distance between p1 and p2 is " +
+			p1.distance(p2));
+	}
+}
+
+//9-6

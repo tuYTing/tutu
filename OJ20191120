@@ -1,0 +1,106 @@
+/*#include<stdio.h>
+#include<stdlib.h>
+char s[1000];
+char x;
+int i = -1;
+typedef struct TreeNode {
+	char data;
+	struct TreeNode *leftchild, *rightchild;
+}TreeNode, *ptr;
+ptr CreateTree(char s[1000]) {  // 建结点
+	ptr bt;
+	if (s[++i] == '#')
+		bt = NULL;
+	else {
+		bt = (ptr)malloc(sizeof(ptr));
+		bt->data = s[i];
+		bt->leftchild = CreateTree(s);
+		bt->rightchild = CreateTree(s);
+	}
+	return bt;
+}
+void Release(ptr tree) {
+	if (!tree)
+		return;
+	Release(tree->leftchild);
+	Release(tree->rightchild);
+	free(tree);
+}
+void Delete_x(ptr tree, char x) {
+	if (tree == NULL)
+		return;
+	if (tree->data == x) {       // 若tree的data为想要删除的元素 则进行删除
+		Release(tree);           // 删除包括根节点
+		tree = NULL;		     // 因为free只是告诉系统这块内存我们不用了而不是物
+					             // 理上面的释放所以我们要手动赋值NULL;
+	}
+	if (tree != NULL) {		     // 这里再次进行一次判断当tree不为空时继续向下执行
+		Delete_x(tree->leftchild, x);
+		Delete_x(tree->rightchild, x);
+	}
+}
+void preorder(ptr tree) {  // 输出先序序列
+	if (tree) {
+		printf("%c", tree->data);
+		preorder(tree->leftchild);
+		preorder(tree->rightchild);
+	}
+	else
+		printf("empty");
+}
+int main() {
+	int n;
+	while (scanf_s("%d", &n) != EOF) {
+		while (n--) {
+			scanf_s("%s", &s);
+			scanf_s("%c", &x);
+			ptr tree = CreateTree(s);
+			Delete_x(tree, x);
+			preorder(tree);
+			printf("\n");
+			int i = -1;
+		}
+	}
+	return 0;
+}*/
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct TreeNode {
+	int data;
+	struct TreeNode *leftchild, *rightchild;
+}TreeNode, *ptr;
+BinTree Insert(BinTree BST, ElementType X){
+	if (!BST) {
+		BST = (BinTree)malloc(sizeof(struct TNode));
+		BST->Data = X;
+		BST->Left = BST->Right = NULL;
+	}
+	else {
+		if (X < BST->Data) {
+			BST->Left = Insert(BST->Left, X);   // 递归插入左子树
+		}
+		else if (X > BST->Data) {
+			BST->Right = Insert(BST->Right, X); // 递归插入右子树
+		}
+
+	}
+	return BST;
+}
+int main(){
+	BinTree BST = NULL;
+	int n;
+	scanf_s("%d", &n);
+	for (int i = 0; i < n; i++) {
+		
+	}
+	char c;
+	while (1){
+		scanf_s("%d", &temp);
+		BST = Insert(BST, temp);
+		c = getchar();
+		if (c != ' ')
+			break;
+	}
+	return 0;
+}

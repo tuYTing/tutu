@@ -85,79 +85,64 @@ int main(){
 
 #include <stdio.h>
 #include <stdlib.h>
-struct Btree{    
-	int x;    
-	Btree *left;    
-	Btree *right;    
-	Btree() {        
-		left = NULL;        
-		right = NULL;    
-	}
-};
-typedef struct Btree Btree;
-Btree *root;
-int n;
-int vis[10000]; 
-void Insert(Btree *&r, int x){    
-	if(r == NULL) {        
-		r = new Btree;        
-		r->x = x;    
-	}    
-	else {        
-		if(x < r->x)
-			Insert(r->left, x);             
-		else
-			Insert(r->right, x);        
+typedef struct TreeNode{
+	int data;
+	struct TreeNode *lchild;
+	struct TreeNode *rchild;
+}TreeNode, *ptr;
+ptr N;
+int i = 0;
+void preorder(ptr N){
+	if(N != NULL){
+		printf("%d ", N->data);
+		preorder(N->lchild);
+		preorder(N->rchild);
 	}
 }
-void preorder(Btree* root) {  // 输出先序序列
-	if (root) {
-		printf("%d ", root->x);
-		preorder(root->left);
-		preorder(root->right);
+void inorder(ptr N){
+	if(N != NULL){
+		inorder(N->lchild);
+		printf("%d ", N->data);
+		inorder(N->rchild);
 	}
 }
-void inorder(Btree* root) {  // 输出中序序列
-	if (root) {
-		inorder(root->left);
-		printf("%d ", root->x);
-		inorder(root->right);
+void postorder(ptr N){
+	if(N != NULL){
+		postorder(N->lchild);
+		postorder(N->rchild);
+		printf("%d ", N->data);
 	}
 }
-void postorder(Btree* root) {  // 输出后序序列
-	if (root) {
-		postorder(root->left);
-		postorder(root->right);
-		printf("%d ", root->x);
-	}
-}
-int Find(int x, Btree *r){    
-	if(r == NULL) 
-		return 0;      
-	else {        
-		if(r->x == x)
-			return 1;
-		else {            
-			int left = Find(x, r->left);            
-			int right = Find(x, r->right);            
-			return left + right;        
-		}    
-	}
+ptr InsertN(ptr N, int x){
+	ptr Node = (ptr)malloc(sizeof(N));
+	Node->data = x;
+	Node->lchild = Node->rchild = NULL;
+	if(N == NULL)
+		N = Node;
+	if(N->lchild == NULL && N->data > x)  // 插入到当前结点N的左孩子
+        N->lchild = Node;
+    if(N->rchild == NULL && N->data < x)  // 插入到当前结点N的右孩子  
+        N->rchild = Node;
+	if(N->data > x)
+		InsertN(N->lchild, x);
+	else if(N->data < x)
+		InsertN(N->rchild, x);	
+	return N;
 }
 int main(){
-	int n, x;
+	int n;
 	scanf("%d", &n);
-	root = NULL;
-	for (int i = 0; i < n; i++) {
-		scanf("%d",&x);  
-        if(Find(x, root) == 0)
-			Insert(root, x);  
+	ptr T = NULL;
+	for(int i = 0; i < n; i++){
+		int x;
+		scanf("%d", &x);
+		T = InsertN(T, x);
 	}
-	preorder(root);
+	preorder(T);
 	printf("\n");
-	inorder(root);
+	inorder(T);
 	printf("\n");
-	postorder(root);
+	postorder(T);
 	printf("\n");
 	return 0;
 }

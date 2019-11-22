@@ -2,19 +2,19 @@
 #include <stdlib.h>
 typedef struct Node{    
 	char data;    
-	Node *Lchild, *Rchild;
+	struct Node *Lchild, *Rchild;
 } BiTNode, *BiTree; 
-BiTree CreateBiTree() {  // 建立二叉树  
-	char x;    
-	BiTree T;    
-	scanf("%c",&x);    
-	if(x == '#')        
+char s[1000];
+int i = -1;
+BiTree CreateBiTree(char s[1000]) {  // 建立二叉树   
+	BiTree T;      
+	if(s[++i] == '#')        
 		T = NULL;    
 	else {        
 		T = (BiTree)malloc(sizeof(BiTNode));       
-		T->data = x;        
-		T->Lchild = CreateBiTree();        
-		T->Rchild = CreateBiTree();    
+		T->data = s[i];        
+		T->Lchild = CreateBiTree(s);        
+		T->Rchild = CreateBiTree(s);    
 	}    
 	return T;
 } 
@@ -44,7 +44,7 @@ BiTree Find(BiTree T, char x) {
 } 
 void PreOrder(BiTree T) {   // 先序 
 	if(T != NULL) {        
-		printf("%c ", T->data);        
+		printf("%c", T->data);        
 		PreOrder(T->Lchild);        
 		PreOrder(T->Rchild);    
 	}
@@ -53,13 +53,15 @@ void Destory(BiTree T) {
 	if(T != NULL) {        
 		Destory(T->Lchild);        
 		Destory(T->Rchild);        
-		free(T);    
+		free(T); 
+		T = NULL;
 	}
 } 
 BiTree Delete(BiTree T, char x) {    
 	BiTNode *p = Find(T, x);    
-	if(p != NULL)        
+	if(p != NULL){        
 		Destory(p);
+	}
 	return T;
 }
 int main(){
@@ -68,16 +70,20 @@ int main(){
 	BiTree T;
 	while (scanf("%d", &n) != EOF) {
 		while (n--) {
-			BiTree root = CreateBiTree();
+			scanf("%s", &s);
+			BiTree root = CreateBiTree(s);
 			getchar(); 
 			scanf("%c", &x);
-			T = Delete(root, x);
-			if(!T)
+			if(x == root->data){
+				T = Delete(root, x);
 				printf("empty");
-			else
-				PreOrder(root);
+			}
+			else{
+				T = Delete(root, x);
+				PreOrder(T);
+			}
 			printf("\n");
-			getchar(); 
+			i = -1;
 		}
 	}
 	return 0;

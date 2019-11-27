@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+char s1[1000];
+char s2[1000];
+typedef struct TreeNode {
+	char data;
+	struct TreeNode *leftchild, *rightchild;
+}TreeNode, *ptr;
+ptr CreateTree(char s1[1000], char s2[1000]) {  // 根据中序和层次遍历建二叉树
+	ptr bt;
+	int i, j;
+	char lefts[1000];
+	char rights[1000];
+	char ss1[1000];
+	char ss2[1000];
+	for (i = 0; i < strlen(s2); i++) {
+		int flag = 0;
+		for (j = 0; j < strlen(s1); j++) {
+			if (s2[i] == s1[j]) {
+				bt->data = s2[i];
+				flag = 1;
+				break;
+			}
+		}
+		if (flag)
+			break;
+	}
+	if (j > 0) { // 遍历左子树
+		for (int k = 0; k < j; k++)
+			lefts[k] = s1[k];
+		for (int k = i + 1; k < strlen(s1); k++)
+			ss1[k - i - 1] = s2[k];
+		bt->leftchild = CreateTree(lefts, ss1);
+	}
+	if (j < strlen(s2) - 1) { // 遍历右子树
+		for (int k = j + 1; k < j; k++)
+			lefts[k - j - 1] = s1[k];
+		for (int k = i + 1; k < strlen(s1); k++)
+			ss2[k - i - 1] = s2[k];
+		bt->rightchild = CreateTree(rights, ss2);
+	}
+	return bt;
+}
+void preorder(ptr bt) {
+	if (bt) {
+		printf("%c", bt->data);
+		preorder(bt->leftchild);
+		preorder(bt->rightchild);
+	}
+}
+int main() {
+	scanf("%s", &s1);
+	scanf("%s", &s2);
+	ptr root = CreateTree(s1, s2);
+	preorder(root);
+	return 0;
+}

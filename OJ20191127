@@ -1,4 +1,3 @@
-https://blog.csdn.net/weixin_43871369/article/details/90289381
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -8,18 +7,16 @@ typedef struct TreeNode {
 	char data;
 	struct TreeNode *leftchild, *rightchild;
 }TreeNode, *ptr;
-ptr CreateTree(char s1[1000], char s2[1000]) {  // 根据中序和层次遍历建二叉树
+void CreateTree(int a1, int b1, int a2, int b2) {  // 根据中序和层次遍历建二叉树
 	ptr bt;
+	bt = (ptr)malloc(sizeof(TreeNode));
 	int i, j;
-	char lefts[1000];
-	char rights[1000];
-	char ss1[1000];
-	char ss2[1000];
-	for (i = 0; i < strlen(s2); i++) {
+	for (i = a2; i <= b2; i++) {
 		int flag = 0;
-		for (j = 0; j < strlen(s1); j++) {
-			if (s2[i] == s1[j]) {
+		for (j = a1; j <= b1; j++) {
+			if (s2[i] == s1[j]) {    // 输出根节点
 				bt->data = s2[i];
+				printf("%c", bt->data);
 				flag = 1;
 				break;
 			}
@@ -27,33 +24,15 @@ ptr CreateTree(char s1[1000], char s2[1000]) {  // 根据中序和层次遍历�
 		if (flag)
 			break;
 	}
-	if (j > 0) { // 遍历左子树
-		for (int k = 0; k < j; k++)
-			lefts[k] = s1[k];
-		for (int k = i + 1; k < strlen(s1); k++)
-			ss1[k - i - 1] = s2[k];
-		bt->leftchild = CreateTree(lefts, ss1);
-	}
-	if (j < strlen(s2) - 1) { // 遍历右子树
-		for (int k = j + 1; k < j; k++)
-			lefts[k - j - 1] = s1[k];
-		for (int k = i + 1; k < strlen(s1); k++)
-			ss2[k - i - 1] = s2[k];
-		bt->rightchild = CreateTree(rights, ss2);
-	}
-	return bt;
-}
-void preorder(ptr bt) {
-	if (bt) {
-		printf("%c", bt->data);
-		preorder(bt->leftchild);
-		preorder(bt->rightchild);
-	}
+	if(j > a1)  // 遍历左子树
+        CreateTree(a1,j-1,0,b2); 
+    if(j < b1)  // 遍历右子树 
+        CreateTree(j+1,b1,0,b2);
 }
 int main() {
 	scanf("%s", &s1);
 	scanf("%s", &s2);
-	ptr root = CreateTree(s1, s2);
-	preorder(root);
+	CreateTree(0, strlen(s1) - 1, 0, strlen(s2));
 	return 0;
 }
+

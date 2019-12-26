@@ -1,181 +1,168 @@
-//**9.9
-public class RegularPolygon {
+//**9.9 几何：正n边形
+import java.util.Scanner; 
 
-			public static void main(String[] args) {
-				// TODO Auto-generated method stub
-				naiguan kk = new naiguan(6,4);
-				System.out.println("周长是：" + kk.getPerimeter());
-				System.out.println("面积是：" + kk.getArea());
-				naiguan ll = new naiguan(10,4,5.6,7.8);	
-				System.out.println("周长是：" + ll.getPerimeter());
-				System.out.println("面积是：" + ll.getArea());
-				naiguan jj = new naiguan();
-				System.out.println("周长是：" + jj.getPerimeter());
-				System.out.println("面积是：" + jj.getArea());
-			}	
-	}
-public class naiguan {
-		private int n;//边数
-		private double side;
-		private double x;	
-		private double y;
-public naiguan()
-{
-	this.n = 3;
-	this.side = 1;
-	this.x = 0;
-	this.y = 0;
-	}
-public naiguan(int n,double side)
-{
-	this.n = n;
-	this.side = side;
-}
-public naiguan(int n,double side,double x,double y)
-{
-	this.n = n;
-	this.side = side;
-	this.x = x;
-	this.y = y;
-	}
-public int getn()
-{
-	return this.n;
-}
-public double getside()
-{
-	return this.side;
-}
-public double getx()
-{
-	return this.x;
-}
-
-public double gety()
-{
-	return this.y;
-}
-public double getPerimeter()
-{
-	return this.n * this.side;
-}
-public double getArea()
-{
-	return (this.n * this.side * this.side) / (4 * Math.tan(Math.PI/this.n));
-}
-}
-
-//**9.12
-public class LinearEquation {
-	private double x1, y1, x2, y2, x3, y3, x4, y4;
-	
-	public LinearEquation(double newx1, double newy1, double newx2, double newy2, double newx3, double newy3, double newx4, double newy4){
-		x1 = newx1;
-		y1 = newy1;
-		x2 = newx2;
-		y2 = newy2;
-		x3 = newx3;
-		y3 = newy3;
-		x4 = newx4;
-		y4 = newy4;
-	}
-	
-	public double getCPx(){
-		return ((x4-x3)*((y1-y2)*x1-(x1-x2)*y1)+(x1-x2)*((y3-y4)*x3-(x3-x4)*y3))/((y1-y2)*(x4-x3)+(y3-y4)*(x1-x2));
-	}
-	
-	public double getCPy(){
-		return ((y1-y2)*((y3-y4)*x3-(x3-x4)*y3)+(y4-y3)*((y1-y2)*x1-(x1-x2)*y1))/((y1-y2)*(x4-x3)+(y3-y4)*(x1-x2));
-	}
-}
-
-import java.util.Scanner;
-public class CrossPoint {
-
+public class Test {
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		
-		System.out.println("请输入第一条线段的两端点(x1, y1),(x2, y2): ");
-		double x1 = input.nextDouble();
-		double y1 = input.nextDouble();
-		double x2 = input.nextDouble();
-		double y2 = input.nextDouble();
-		System.out.println("请输入第二条线段的两端点(x3, y3),(x4, y4): ");
-		double x3 = input.nextDouble();
-		double y3 = input.nextDouble();
-		double x4 = input.nextDouble();
-		double y4 = input.nextDouble();
-		
-		LinearEquation twolines = new LinearEquation(x1, y1, x2, y2, x3, y3, x4, y4);
-		String x = String.format("%.2f", twolines.getCPx());
-		String y = String.format("%.2f", twolines.getCPy());
-		System.out.println("两线段的交点为: (" + x + ", " + y + ")");
+		RegularPolygon g1 = new RegularPolygon();		
+		System.out.println("g1 perimeter:" + g1.getPerimeter() + "    " + "g1 area:" + g1.getArea());		
+		RegularPolygon g2 = new RegularPolygon(6,4);	
+		System.out.println("g2 perimeter:" + g2.getPerimeter() + "    " + "g2 area:" + g2.getArea());	
+		RegularPolygon g3 = new RegularPolygon(10,4,5.6,7.8);	
+		System.out.println("g3 perimeter:" + g3.getPerimeter() + "    " + "g3 area:" + g3.getArea());
 	}
-
 }
-
 
 public class RegularPolygon {
-	private int n;
+	private int n;	
 	private double side;
-	private double x;
-	private double y;
+	private double x;	
+	private double y;	
+	public RegularPolygon(){	
+		n = 3;	
+		side = 1;	
+		x = 0;	
+		y = 0;	
+	}	
 	
-	public RegularPolygon(){
-		this.n = 3;
-		this.side = 1;
-		this.x = 0;
-		this.y = 0;
+	public RegularPolygon(int num, double len){	
+		n = num;	
+		side = len;	
+		x = 0;	
+		y = 0;	
 	}
 	
-	public RegularPolygon(int newn, double newside){
-		n = newn;
-		side = newside;
-		this.x = 0;
-		this.y = 0;
+	public RegularPolygon(int num, double len, double a, double b){	
+		n = num;	
+		side = len;	
+		x = a;	
+		y = b;	
+	}	
+	
+	public int getN(){	
+		return n;	
 	}
 	
-	public RegularPolygon(double newx, double newy){
-		this.n = 3;
-		this.side = 1;
-		x = newx;
-		y = newy;
+	public void setN(int num){	
+		n = num;	
+	}	
+	
+	public double getSide(){	
+		return side;	
 	}
 	
-	public int getN(){
-		return n;
+	public void setSide(double len){
+		side = len;	
+	}	
+	
+	public double getX(){	
+		return x;	
 	}
 	
-	public double getSide(){
-		return side;
+	public void setX(double X){		
+		x = X;	
+	}	
+	
+	public double getY(){	
+		return y;	
+	}	
+	
+	public void setY(double Y){	
+		y = Y;	
+	}	
+	
+	public double getPerimeter(){	
+		return n*side;	
 	}
 	
-	public double getX(){
-		return x;
-	}
-	
-	public double getY(){
-		return y;
-	}
-	
-	public void setN(int newn){
-		n = newn;
-	}
-	
-	public void setSide(double newside){
-		side = newside;
-	}
-	
-	public void setX(double newx){
-		x = newx;
-	}
-	
-	public void setY(double newy){
-		y = newy;
+	public double getArea(){	
+		return (n*side*side)/(4*Math.tan(Math.PI/n));	
 	}
 }
 
-//**9.13
+//**9.12 几何：交点
+import java.util.Scanner; 
+
+public class Test {
+	public static void main(String[] args) {
+		Scanner cin = new Scanner(System.in);	
+		double x1,y1,x2,y2,x3,y3,x4,y4;		
+		System.out.print("Enter x1,y1,x2,y2,x3,y3,x4,y4: ");	
+		x1 = cin.nextDouble();		
+		y1 = cin.nextDouble();		
+		x2 = cin.nextDouble();		
+		y2 = cin.nextDouble();		
+		x3 = cin.nextDouble();	
+		y3 = cin.nextDouble();	
+		x4 = cin.nextDouble();	
+		y4 = cin.nextDouble();		
+		double a,b,c,d,e,f;		
+		a = y1 - y2;		
+		b = -(x1 - x2);		
+		c = y3 - y4;		
+		d = -(x3 - x4);	
+		e = (y1-y2)*x1 - (x1-x2)*y1;	
+		f = (y3-y4)*x3 - (x3-x4)*y3;	
+		LinearEquation expr = new LinearEquation(a,b,c,d,e,f);		
+		
+		if(expr.isSolvable())
+			System.out.println("The intersecting point is at (" + expr.getX() + ", " + expr.getY() + ")");	
+		else
+			System.out.println("The tow line are parallel");
+	}
+}
+
+public class LinearEquation {
+	private double a,b,c,d,e,f;	
+	public LinearEquation(double v1, double v2, double v3, double v4, double v5, double v6){	
+		a = v1;	
+		b = v2;		
+		c = v3;		
+		d = v4;		
+		e = v5;	
+		f = v6;	
+	}	
+	
+	public double getA(){		
+		return a;	
+	}	
+	
+	public double getB(){	
+		return b;	
+	}	
+	
+	public double getC(){	
+		return c;	
+	}	
+	
+	public double getD(){	
+		return d;	
+	}	
+	
+	public double getE(){
+		return e;
+	}
+	
+	public double getF(){	
+		return f;	
+	}
+	
+	public boolean isSolvable(){	
+		if((a*d-b*c) != 0)		
+			return true;	
+		else		
+			return false;	
+	}	
+	
+	public double getX(){	
+		return (e*d-b*f)/(a*d-b*c);	
+	}	
+	
+	public double getY(){	
+		return (a*f-e*c)/(a*d-b*c);	
+	}
+}
+
+//**9.13 位置类Location
 //Great a Scanner
 		 Scanner input = new Scanner(System.in);
 		 //Enter array value;

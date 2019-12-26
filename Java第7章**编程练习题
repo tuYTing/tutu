@@ -124,3 +124,37 @@ public class Test {
 }
 
 //**7.19 是否排好序了
+import java.util.Scanner;  
+
+public class Test {
+	/** Main method */
+	public static void main(String[] args) {
+		Scanner cin = new Scanner(System.in);		
+		System.out.print("Enter list: ");		
+		int n = cin.nextInt();		
+		int[] nums = new int[n];		
+		for(int i = 0; i < n; ++i)			
+			nums[i] = cin.nextInt();				
+		for(int i = 1; i < n; ++i){			
+			if(nums[i] < nums[i-1]){				
+				System.out.println("The list is not sorted");				
+				return ;			
+			}		
+		}		
+		System.out.println("The list is already sorted");	
+	}
+}
+
+//**7.23 游戏：储物柜难题
+
+
+//**7.24 仿真：优惠券收集人问题
+
+
+//**7.31 合并两个有序列表
+
+
+//**7.32 划分列表
+
+
+//**7.34 对字符串中的字符排序

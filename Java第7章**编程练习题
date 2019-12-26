@@ -217,6 +217,39 @@ public class Test {
 }
 
 //**7.32 划分列表
+import java.util.Scanner;  
 
+public class Test {
+	/** Main method */
+	public static void main(String[] args) {
+		System.out.print("Enter list: ");
+		Scanner cin = new Scanner(System.in);
+		Integer n = cin.nextInt();
+		int[] nums = new int[n];		
+		for(int i = 0; i < n; ++i)			
+			nums[i] = cin.nextInt();			
+		int num = partition(nums);		
+		System.out.print("After the partition, the list is ");
+		for(int i = 0; i < n; ++i)			
+			System.out.print(nums[i] + " ");
+	}
+	
+	public static int partition(int[] list){		
+		int temp = 0;		
+		int j = 0;		
+		for(int i = 1; i < list.length; ++i){			
+			if(list[i] <= list[j]){				
+				temp = list[i];				
+				list[i] = list[j];				
+				list[j] = temp;								
+				temp = list[j+1];				
+				list[j+1] = list[i];				
+				list[i] = temp;								
+				++j;			
+			}		
+		}		
+		return j;	
+	}
+}
 
 //**7.34 对字符串中的字符排序

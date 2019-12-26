@@ -1,4 +1,4 @@
-//**7.3
+//**7.3 计算数字的出现次数
 import java.util.Scanner;  
 import java.util.Arrays;
 
@@ -35,7 +35,7 @@ public class Test {
 	}
 }
 
-//**7.5
+//**7.5 打印不同的数
 import java.util.Scanner;  
 
 public class Test {
@@ -62,7 +62,7 @@ public class Test {
 	}
 }
 
-//**7.17
+//**7.17 对学生排序
 import java.util.Scanner;  
 
 public class Test {
@@ -96,4 +96,31 @@ public class Test {
 	}
 }
 
-//**7.18
+//**7.18 冒泡排序
+import java.util.Scanner;  
+
+public class Test {
+	/** Main method */
+	public static void main(String[] args) {
+		Scanner cin = new Scanner(System.in);		
+		int n = cin.nextInt();		
+		double[] nums = new double[n];				
+		for(int i = 0; i < n; ++i){			
+			nums[i] = cin.nextDouble();		
+		}				
+		for(int i = 0; i < n-1; ++i){			
+			for(int j = 0; j < n-1; ++j){				
+				if(nums[j] > nums[j+1]){					
+					double temp = nums[j];					
+					nums[j] = nums[j+1];					
+					nums[j+1] = temp;				
+				}			
+			}		
+		}				
+		for(int i = 0; i < n; ++i){			
+			System.out.println(nums[i]);		
+		}	
+	}
+}
+
+//**7.19 是否排好序了
